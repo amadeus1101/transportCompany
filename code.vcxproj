@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Auth.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>

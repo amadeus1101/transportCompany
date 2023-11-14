@@ -1,6 +1,6 @@
 #pragma once
 
-class CargoList
+class CargoList 
 {
 public:
 	void createCargo();

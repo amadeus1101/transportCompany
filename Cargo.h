@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-class Cargo
+class Cargo 
 {
 protected:
 	int cargo_id;

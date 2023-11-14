@@ -11,7 +11,6 @@ protected:
 	std::string tel;
 	char role[2];
 public:
-	virtual void menu() = 0;
 	virtual void showProfile() = 0;
 	virtual void changePassword() = 0;
 };

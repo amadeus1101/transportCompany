@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-class Vehicle
+class Vehicle 
 {
 protected:
 	int vehicle_ID;

@@ -5,6 +5,7 @@
 #include "Vehicle.h"
 #include "Route.h"
 
+
 class Application : public Customer, public Cargo, public Vehicle, public Route
 {
 protected:
