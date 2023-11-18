@@ -1,18 +1,23 @@
 #pragma once
-#include <string>
-#include "User.h"
-#include "ApplicationsList.h"
-#include "CargoList.h"
+#define _CRT_SECURE_NO_WARNINGS
 
-class Customer : public User, public ApplicationsList, public CargoList
+#include <iostream>
+#include <fstream>
+#include <string>
+
+#include "User.h"
+
+class Customer : public User
 {
+protected:
+	//int* orders_history = new int[10];
+	//int* orders_processing = new int[10];
 public:
-	//stack MYordersInProcess
-	//stack MYordersCompleted
-	//override show profile
-	//override menu
-	//override logout
-	//override change password
-	//peregruz+perenaznach roditelei
+	Customer();
+	Customer(int, std::string, std::string, std::string, std::string);
+	//~Customer() { delete[]orders_history; delete[]orders_processing; }
+	void show() override;
+	void menu() override;
 	
 };
+
