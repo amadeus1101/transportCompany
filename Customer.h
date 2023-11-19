@@ -6,6 +6,7 @@
 #include <string>
 
 #include "User.h"
+#include "Cargo.h"
 
 class Customer : public User
 {
@@ -15,6 +16,8 @@ protected:
 public:
 	Customer();
 	Customer(int, std::string, std::string, std::string, std::string);
+	void createCargo();
+	void createApplication();
 	//~Customer() { delete[]orders_history; delete[]orders_processing; }
 	void show() override;
 	void menu() override;

@@ -22,6 +22,7 @@ protected:
 	std::vector<AuthUser> UVector;
 public:
 	void authMenu();
+	bool validateData(std::string, std::string);
 	bool authorization();
 	bool registration();
 };

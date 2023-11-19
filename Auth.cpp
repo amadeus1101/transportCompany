@@ -14,7 +14,55 @@ void Auth::authMenu() {
 		std::cout << "Oshibka vibora" << std::endl;
 	}
 }
-
+bool Auth::validateData(std::string _uname, std::string _pass) {
+	size_t unameLen = _uname.length();
+	size_t passLen = _pass.length();
+	bool isPassValid = false;
+	if (unameLen == 0 || passLen == 0)
+	{
+		std::cout << "Fields cannot be empty" << std::endl;
+		return false;
+	}
+	if (unameLen < 4 || unameLen > 11)
+	{
+		std::cout << "The username should be > 3 and < 12 symbols";
+		return false;
+	}
+	if (passLen < 5 || passLen > 13)
+	{
+		std::cout << "The password should be > 4 and < 13 symbols ";
+		return false;
+	}
+	for (int j = 0; j < unameLen; j++)
+	{
+		char c = _uname[j];
+		if (c < 57)
+		{
+			isPassValid = true;
+			break;
+		}
+	}
+	if (!isPassValid) {
+		std::cout << "The password should contain minimum 1 number" << std::endl;
+		return false;
+	}
+	isPassValid = false;
+	for (int j = 0; j < unameLen; j++)
+	{
+		char c = _uname[j];
+		if (c > 65)
+		{
+			isPassValid = true;
+			break;
+		}
+	}
+	if (!isPassValid) {
+		std::cout << "The password should contain minimum 1 letter" << std::endl;
+		return false;
+	}
+	std::cout << "All data is valid. USER registrated" << std::endl;
+	return true;
+}
 bool Auth::authorization() {
 	int len;
 	char c;
@@ -30,6 +78,7 @@ bool Auth::authorization() {
 	std::cin >> UObj._login;
 	std::cout << std::endl <<"password: ";
 	std::cin >> UObj._password;
+
 
 	while (!fin.eof())
 	{
@@ -88,8 +137,9 @@ bool Auth::authorization() {
 	{
 		if (UObj._login == UVector[j]._login && UObj._password == UVector[j]._password)
 		{
+			//IF USER MANAGER ADMIN EMPLOYEE .......
 			user = new Customer(UVector[j]._user_ID, UVector[j]._login, UVector[j]._password, UVector[j]._name, UVector[j]._role);
-			user->show();
+			user->menu();
 			return true;
 		}
 	}
@@ -98,14 +148,25 @@ bool Auth::authorization() {
 }
 
 bool Auth::registration() {
+	bool isDataValid = false;
+	std::string _unm = "";
+	std::string _pswrd = "";
+
 	std::cout << "***REGISTRATION***" << std::endl;
 	std::cout << "ENTER_YOUR_DATA>>>" << std::endl;
-	std::cout << std::endl << "login: ";
-	std::cin >> UObj._login;
-	std::cout << std::endl << "password: ";
-	std::cin >> UObj._password;
 	std::cout << std::endl << "name: ";
 	std::cin >> UObj._name;
+	
+	while (!isDataValid)
+	{
+		std::cout << std::endl << "login: ";
+		std::cin >> _unm;
+		std::cout << std::endl << "password: ";
+		std::cin >> _pswrd;
+		isDataValid = validateData(_unm, _pswrd);
+	}
+	UObj._login = _unm;
+	UObj._password = _pswrd;
 
 	//FILE
 
@@ -123,7 +184,7 @@ bool Auth::registration() {
 
 	//LOGIN
 
-	int len = UObj._login.length();
+	size_t len = UObj._login.length();
 	fout.write((char*)&len, sizeof(int));
 	for (int i = 0; i < len; i++)
 		fout.write((char*)&UObj._login[i], sizeof(UObj._login[i]));
