@@ -61,19 +61,27 @@ UsersHashMap::UsersHashMap(std::string _file_name, int _size) {
 		//ROLE
 
 		fin.read((char*)&usr->t_status, sizeof(int));
-		int hashRes = usr->t_username.size() % size;
-		
-		if (usersTable[hashRes] == nullptr)
+
+		if (usr->t_status > -2 && usr->t_status < 5)
 		{
-			usersTable[hashRes] = usr;
-			usr->next = nullptr;
+			int hashRes = 0;
+			int ll = usr->t_username.length();
+			for (int k = 0; k < ll; k++)
+				hashRes += usr->t_username[k];
+			hashRes %= size;
+
+			if (usersTable[hashRes] == nullptr)
+			{
+				usersTable[hashRes] = usr;
+				usr->next = nullptr;
+			}
+			else {
+				usr->next = usersTable[hashRes];
+				usersTable[hashRes] = usr;
+			}
+			count++;
+			all_count++;
 		}
-		else {
-			usr->next = usersTable[hashRes];
-			usersTable[hashRes] = usr;
-		}
-		count++;
-		all_count++;
 	}
 
 	fin.close();
@@ -87,7 +95,13 @@ UsersHashMap::~UsersHashMap() {
 	delete[] usersTable;
 }
 
-bool UsersHashMap::write(int _id = -1, std::string _username="", std::string _password="", std::string _name="", int _status = 1) {
+int UsersHashMap::generateId() {
+	return all_count;
+}
+
+bool UsersHashMap::write(std::string _username="", std::string _password="", std::string _name="") {
+	int _status = 4;
+	int _id = generateId();
 
 	fout.open(file_name, std::ios::out | std::ios::binary | std::ios::app);
 	if (!fout.is_open())
@@ -135,11 +149,12 @@ bool UsersHashMap::write(int _id = -1, std::string _username="", std::string _pa
 
 int UsersHashMap::hash(std::string _login) {
 	int hashRes = 0;
-	int len = _login.size();
-	/*for (int i = 0; i < len; i++)	
-		hashRes = (hashRes + _login[i]) % size;
-	hashRes = (hashRes * 2 + 1) % size;*/
-	return len % size;
+	int len = _login.length();
+	for (int j = 0; j < len; j++)
+	{
+		hashRes += _login[j];
+	}
+	return hashRes % size;
 }
 
 bool UsersHashMap::resize() {
@@ -192,6 +207,7 @@ void UsersHashMap::rehash() {
 }
 
 bool UsersHashMap::insert(tUser *user) {
+	if (user->t_status < -2 || user->t_status > 5) return false;
 	if (count > size * rehash_val)
 		resize();
 	int hashRes = hash(user->t_username);
@@ -211,6 +227,7 @@ bool UsersHashMap::insert(tUser *user) {
 }
 
 bool UsersHashMap::insert(int _userId, std::string _username, std::string _password, std::string _name, int _role=1) {
+	if (_role < -2 || _role > 5) return false;
 	tUser* user = new tUser;
 	user->next = nullptr;
 	user->t_id = _userId;
@@ -249,10 +266,19 @@ UsersHashMap::tUser* UsersHashMap::find(std::string _login) {
 	return nullptr;
 }
 
-UsersHashMap::tUser* UsersHashMap::getAuth(std::string _login, std::string _password) {
+std::string* UsersHashMap::getAuth(std::string _login, std::string _password) {
 	tUser* authUser = find(_login);
+	if (!authUser) return NULL;
 	if (authUser->t_password == _password)
-		return authUser;
+	{
+		std::string* ud = new std::string[5];
+		ud[0] = std::to_string(authUser->t_id);
+		ud[1] = authUser->t_username;
+		ud[2] = authUser->t_password;
+		ud[3] = authUser->t_name;
+		ud[4] = std::to_string(authUser->t_status);
+		return ud;
+	}
 	return NULL;
 }
 

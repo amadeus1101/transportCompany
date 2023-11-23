@@ -25,23 +25,20 @@ private:
 	//METHODS
 
 	int hash(std::string);
+	bool doBackUp(std::string); //FOR ADMIN
+	bool readOtherDB(std::string); //FOR ADMIN
 public:
-	//UsersHashMap();
 	UsersHashMap(std::string, int);
 	~UsersHashMap();
-	//FILE
-	bool write(int, std::string, std::string, std::string, int);
-	//bool read();
-	//SCRINE ALL BD IN NEW FILE FUNC() FOR ADMIN
-	//HASH
+	int generateId();
+	bool write(std::string, std::string, std::string);
 	bool resize();
-	void rehash();
 	bool insert(tUser*);
 	bool remove(int);
 	bool remove(std::string);
-	//USERS
-	tUser* find(std::string);
-	tUser* getAuth(std::string, std::string);
 	bool insert(int, std::string, std::string, std::string, int);
+	tUser* find(std::string);
+	std::string* getAuth(std::string, std::string);
+	void rehash();
 	void getUsers();
 ;};

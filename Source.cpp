@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iomanip>
@@ -10,10 +11,7 @@ using namespace std;
 
 int main() {
 	//ENTER -> WORK -> EXIT
-	
 	UAuthorized unAuthUser;
-	//UObj.insert(15, "+-USERNAME-+", "++PASSWORDE++", "***PERSONALE***", 1);
-	//UObj.getUsers();
 	int user_choice = 0;
 	while (user_choice != 3)
 	{
@@ -32,7 +30,7 @@ int main() {
 		case 3:
 			cout << "(3)" << endl; break;
 		default:
-			break;
+			unAuthUser.getAll();
 		}
 	}
 	

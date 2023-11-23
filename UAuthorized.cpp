@@ -4,8 +4,12 @@ UAuthorized::UAuthorized() {
 	UObj = new UsersHashMap("USERS.dat", 10);
 }
 
-int UAuthorized::authorization() {
+void UAuthorized::getAll() {
+	std::cout << "GET ALL FUCKING USERS" << std::endl;
+	UObj->getUsers();
+}
 
+bool UAuthorized::authorization() {
 	std::string _cusernm;
 	std::string _cpass;
 
@@ -15,21 +19,34 @@ int UAuthorized::authorization() {
 	std::cin >> _cusernm;
 	std::cout << std::endl << "password: ";
 	std::cin >> _cpass;
-
-	if (UObj->getAuth(_cusernm, _cpass))
+	std::string* userObj = UObj->getAuth(_cusernm, _cpass);
+	if (userObj != NULL)
 	{
-		User* tObj = new User(UObj->find(_cusernm)->t_id, UObj->find(_cusernm)->t_username, UObj->find(_cusernm)->t_password, UObj->find(_cusernm)->t_name, UObj->find(_cusernm)->t_status);
-		tObj->show();
+		User* user;
+		int uid = atoi(userObj[0].c_str());
+		int ust = atoi(userObj[4].c_str());
+		switch (ust)
+		{
+		case 2:
+			user = new Employee(uid, userObj[1], userObj[2], userObj[3], ust); break;
+		case 3:
+			user = new Manager(uid, userObj[1], userObj[2], userObj[3], ust); break;
+		case 4:
+			user = new Admin(uid, userObj[1], userObj[2], userObj[3], ust); break;
+		default:
+			user = new User(uid, userObj[1], userObj[2], userObj[3], ust);
+			break;
+		}
+		user->menu();
 	}
 	else std::cout << "PAROL NEVERNIJ ILI TAKOGO USERA NETU";
 
 	//if (UObj->getAuth(_cusernm, _cpass)) std::cout << "USPESHNO" << std::endl;
 	
-	return 5;
+	return true;
 }
 
 bool UAuthorized::registration() {
-	int temp_id = 25;
 	bool isPasswordValid = false;
 
 	std::string _username;
@@ -48,7 +65,7 @@ bool UAuthorized::registration() {
 		std::cin >> _name;
 		isPasswordValid = validate(_username, _password);
 	}
-	UObj->write(temp_id, _username, _password, _name, 1);
+	UObj->write(_username, _password, _name);
 
 	return true;
 }
