@@ -1,20 +1,27 @@
 #pragma once
 
+#include <iostream>
+#include <fstream>
 #include <string>
-
-#include "ApplicationList.h"
-#include "OrderList.h"
-#include "UserList.h"
 
 class User
 {
 protected:
-	int user_ID;
-	std::string login;
+	int user_id;
+	std::string username;
 	std::string password;
 	std::string name;
-	std::string role;
+	int status;
+	//int* orders_history = new int[10];
+	//int* orders_processing = new int[10];
 public:
-	virtual void show() = 0;
-	virtual void menu() = 0;
+	User(int, std::string, std::string, std::string, int);
+	//virtual void menu();
+	int getStatus();
+	void show();
+	bool setStatus(int);
+	bool getAccess(std::string, std::string);
+	
+	//~Customer() { delete[]orders_history; delete[]orders_processing; }
 };
+
