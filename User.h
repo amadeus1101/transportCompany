@@ -9,16 +9,17 @@
 class User
 {
 protected:
-	//UsersHashMap* UDB;
 	int user_id;
 	std::string username;
 	std::string password;
 	std::string name;
 	int status;
+	//HASH
+	//UsersHashMap *UDB;
 public:
 	User(int, std::string, std::string, std::string, int);
-	bool trackOrder();
-	void show();
+	bool getTrack();
+	void profile();
 	virtual void menu();
 	//virtual void showCompleted();
 private:

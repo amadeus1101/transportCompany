@@ -2,12 +2,16 @@
 
 User::User(int _userID, std::string _username, std::string _password, std::string _name, int _status)
 {
-	//UDB = new UsersHashMap("USERS.dat", 10);
 	user_id = _userID;
 	username = _username;
 	password = _password;
 	name = _name;
 	status = _status;
+
+	std::string _filename = "USERS.dat";
+	int _size = 10;
+	//HASH
+	//UDB = new UsersHashMap(_filename, _size);
 }
 
 void User::menu() {
@@ -22,7 +26,7 @@ void User::menu() {
 		switch (user_choice)
 		{
 		case 1:
-			show(); break;
+			profile(); break;
 		case 2:
 			createCargo(); break;
 		case 3:
@@ -33,7 +37,7 @@ void User::menu() {
 	}
 }
 
-void User::show() {
+void User::profile() {
 	std::cout << user_id << "+++" << username << "+++" << password << "+++" << name << "+++" << status << std::endl;
 }
 

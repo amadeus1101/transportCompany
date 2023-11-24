@@ -62,35 +62,23 @@ UsersHashMap::UsersHashMap(std::string _file_name, int _size) {
 
 		fin.read((char*)&usr->t_status, sizeof(int));
 
-		if (usr->t_status > -2 && usr->t_status < 5)
-		{
-			int hashRes = 0;
-			int ll = usr->t_username.length();
-			for (int k = 0; k < ll; k++)
-				hashRes += usr->t_username[k];
-			hashRes %= size;
-
-			if (usersTable[hashRes] == nullptr)
-			{
-				usersTable[hashRes] = usr;
-				usr->next = nullptr;
-			}
-			else {
-				usr->next = usersTable[hashRes];
-				usersTable[hashRes] = usr;
-			}
-			count++;
-			all_count++;
-		}
+		insert(usr);
 	}
 
 	fin.close();
 }
 
 UsersHashMap::~UsersHashMap() {
+	tUser* spt, * sp;
 	for (int i = 0; i < size; i++)
 	{
-		if (usersTable[i]) delete usersTable[i];
+		sp = usersTable[i];
+		while (sp)
+		{
+			spt = sp;
+			sp = sp->next;
+			delete spt;
+		}
 	}
 	delete[] usersTable;
 }
@@ -100,7 +88,7 @@ int UsersHashMap::generateId() {
 }
 
 bool UsersHashMap::write(std::string _username="", std::string _password="", std::string _name="") {
-	int _status = 4;
+	int _status = 1;
 	int _id = generateId();
 
 	fout.open(file_name, std::ios::out | std::ios::binary | std::ios::app);
@@ -145,8 +133,6 @@ bool UsersHashMap::write(std::string _username="", std::string _password="", std
 	return true;
 }
 
-//bool UsersHashMap::read() {}
-
 int UsersHashMap::hash(std::string _login) {
 	int hashRes = 0;
 	int len = _login.length();
@@ -179,37 +165,64 @@ bool UsersHashMap::resize() {
 			insert(spp);
 		}
 	}
+	/*tUser* spt, * sp;
+	for (int i = 0; i < size; i++)
+	{
+		sp = temp_usersTable[i];
+		while (sp)
+		{
+			spt = sp;
+			if(sp->next)
+				sp = sp->next;
+			delete spt;
+		}
+	}
+	delete[] temp_usersTable;*/
 	return true;
 }
 
 void UsersHashMap::rehash() {
-	tUser** usersTable2 = usersTable;
+	all_count = 0;
+	count = 0;
+	tUser** temp_usersTable = usersTable;
 
 	for (int i = 0; i < size; i++)
 		usersTable[i] = nullptr;
 
-	//swap spiska
+	tUser* spt, *sp;
 
 	for (int i = 0; i < size; ++i)
 	{
-		tUser* spt = usersTable2[i];
+		spt = temp_usersTable[i];
 		while (spt)
 		{
 			if (spt->t_status > 0)
 			{
-				tUser* spp = spt;
+				sp = spt;
 				spt = spt->next;
-				insert(spp);
-			}
-				
+				insert(sp);
+			}	
 		}
 	}
+	for (int i = 0; i < size; i++)
+	{
+		sp = temp_usersTable[i];
+		while (sp)
+		{
+			spt = sp;
+			sp = sp->next;
+			delete spt;
+		}
+	}
+	delete[] temp_usersTable;
 }
 
 bool UsersHashMap::insert(tUser *user) {
 	if (user->t_status < -2 || user->t_status > 5) return false;
-	if (count > size * rehash_val)
+	if (count > size * 0.75)
 		resize();
+	if (all_count * 0.5 > count)
+		rehash();
 	int hashRes = hash(user->t_username);
 	if (usersTable[hashRes] == nullptr)
 	{
@@ -222,7 +235,6 @@ bool UsersHashMap::insert(tUser *user) {
 	}
 	all_count++;
 	count++;
-	//write(user->t_id, user->t_username, user->t_password, user->t_name, user->t_status);
 	return true;
 }
 
@@ -236,8 +248,10 @@ bool UsersHashMap::insert(int _userId, std::string _username, std::string _passw
 	user->t_name = _name;
 	user->t_status = _role;
 
-	if (count > size * rehash_val)
+	if (count > size * 0.75)
 		resize();
+	if (all_count * 0.5 > count)
+		rehash();
 	int hashRes = hash(user->t_username);
 	if (usersTable[hashRes] == nullptr)
 	{
@@ -282,11 +296,6 @@ std::string* UsersHashMap::getAuth(std::string _login, std::string _password) {
 	return NULL;
 }
 
-bool UsersHashMap::remove(int _userID) {
-	//O(n) like array because ID
-	return false;
-}
-
 bool UsersHashMap::remove(std::string _login) {
 	tUser* spt = find(_login);
 	if (spt) 
@@ -309,4 +318,138 @@ void UsersHashMap::getUsers() {
 			spt = spt->next;
 		}
 	}
+}
+
+bool UsersHashMap::doBackUp(std::string _filename) {
+
+	fout.open(_filename, std::ios::out | std::ios::binary | std::ios::app);
+	if (!fout.is_open())
+	{
+		std::cout << "oshibka s failom";
+		return false;
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		tUser* spt = usersTable[i];
+		while (spt)
+		{
+			//USER_ID
+
+			fout.write((char*)&spt->t_id, sizeof(int));
+
+			//LOGIN
+
+			size_t len = spt->t_username.length();
+			fout.write((char*)&len, sizeof(int));
+			for (int i = 0; i < len; i++)
+				fout.write((char*)&spt->t_username[i], sizeof(spt->t_username[i]));
+
+			//PASSWORD
+
+			len = spt->t_password.length();
+			fout.write((char*)&len, sizeof(int));
+			for (int i = 0; i < len; i++)
+				fout.write((char*)&spt->t_password[i], sizeof(spt->t_password[i]));
+
+			//NAME
+
+			len = spt->t_name.length();
+			fout.write((char*)&len, sizeof(int));
+			for (int i = 0; i < len; i++)
+				fout.write((char*)&spt->t_name[i], sizeof(spt->t_name[i]));
+
+			// ROLE
+
+			fout.write((char*)&spt->t_status, sizeof(int));
+
+			spt = spt->next;
+		}
+		
+	}
+	fout.close();
+	return true;
+}
+
+bool UsersHashMap::readOtherDB(std::string _filename, int _size = 10) {
+	count = 0;
+	all_count = 0;
+	file_name = _filename;
+	tUser** temp_usersTable = usersTable;
+	usersTable = new tUser * [size];
+
+	for (int i = 0; i < size; i++)
+		usersTable[i] = nullptr;
+	size = _size;
+	//FILE
+
+	fin.open(file_name, std::ios::in | std::ios::binary);
+	if (!fin.is_open())
+	{
+		std::cout << "NET DOSTUPA K DB" << std::endl;
+		return false;
+	}
+
+	while (!fin.eof())
+	{
+		int len=0;
+		char c;
+		tUser* new_usr = new tUser;
+		//USER_ID
+
+		fin.read((char*)&new_usr->t_id, sizeof(int));
+
+		//LOGIN
+
+		fin.read((char*)&len, sizeof(int));
+
+		new_usr->t_username = "";
+		for (int i = 0; i < len; i++)
+		{
+			fin.read((char*)&c, sizeof(c));
+			new_usr->t_username += c;
+		}
+
+		//PASSWORD
+
+		fin.read((char*)&len, sizeof(int));
+		new_usr->t_password = "";
+		for (int i = 0; i < len; i++)
+		{
+			fin.read((char*)&c, sizeof(c));
+			new_usr->t_password += c;
+		}
+
+		//NAME
+
+		fin.read((char*)&len, sizeof(int));
+		new_usr->t_name = "";
+		for (int i = 0; i < len; i++)
+		{
+			fin.read((char*)&c, sizeof(c));
+			new_usr->t_name += c;
+		}
+
+		//ROLE
+
+		fin.read((char*)&new_usr->t_status, sizeof(int));
+
+		insert(new_usr);
+	}
+
+	fin.close();
+
+	tUser* spt, * sp;
+	for (int i = 0; i < size; i++)
+	{
+		sp = temp_usersTable[i];
+		while (sp)
+		{
+			spt = sp;
+			sp = sp->next;
+			delete spt;
+		}
+	}
+	delete[] temp_usersTable;
+	return true;
 }

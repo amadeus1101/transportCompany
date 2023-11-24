@@ -20,13 +20,12 @@ private:
 	int size;
 	int count;
 	int all_count;
-	static const int rehash_val = 0.75;
+	double rehash_val = 0.75;
 
 	//METHODS
 
 	int hash(std::string);
-	bool doBackUp(std::string); //FOR ADMIN
-	bool readOtherDB(std::string); //FOR ADMIN
+	
 public:
 	UsersHashMap(std::string, int);
 	~UsersHashMap();
@@ -34,9 +33,10 @@ public:
 	bool write(std::string, std::string, std::string);
 	bool resize();
 	bool insert(tUser*);
-	bool remove(int);
 	bool remove(std::string);
 	bool insert(int, std::string, std::string, std::string, int);
+	bool doBackUp(std::string); //FOR ADMIN
+	bool readOtherDB(std::string, int); //FOR ADMIN
 	tUser* find(std::string);
 	std::string* getAuth(std::string, std::string);
 	void rehash();

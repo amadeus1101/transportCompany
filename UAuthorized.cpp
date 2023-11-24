@@ -5,7 +5,7 @@ UAuthorized::UAuthorized() {
 }
 
 void UAuthorized::getAll() {
-	std::cout << "GET ALL FUCKING USERS" << std::endl;
+	std::cout << "**********USERS DB**********" << std::endl;
 	UObj->getUsers();
 }
 
@@ -19,7 +19,9 @@ bool UAuthorized::authorization() {
 	std::cin >> _cusernm;
 	std::cout << std::endl << "password: ";
 	std::cin >> _cpass;
+
 	std::string* userObj = UObj->getAuth(_cusernm, _cpass);
+
 	if (userObj != NULL)
 	{
 		User* user;
@@ -71,6 +73,8 @@ bool UAuthorized::registration() {
 }
 
 bool UAuthorized::validate(std::string _uname, std::string _pass) {
+	std::transform(_uname.begin(), _uname.end(), _uname.begin(), ::tolower);
+	std::transform(_pass.begin(), _pass.end(), _pass.begin(), ::tolower);
 	size_t unameLen = _uname.length();
 	size_t passLen = _pass.length();
 	bool isPassValid = false;
@@ -115,6 +119,11 @@ bool UAuthorized::validate(std::string _uname, std::string _pass) {
 	}
 	if (!isPassValid) {
 		std::cout << "The password should contain minimum 1 letter" << std::endl;
+		return false;
+	}
+	if (UObj->find(_uname) != NULL)
+	{
+		std::cout << "The username has already taken, try to create another new;(" << std::endl;
 		return false;
 	}
 	std::cout << "All data is valid. USER registrated" << std::endl;
