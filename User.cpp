@@ -42,6 +42,11 @@ void User::profile() {
 }
 
 bool User::createCargo() {
-	std::cout << "CARGOOOOOOOOOOOO" << std::endl;
+	double a, b;
+	std::string c, d, e;
+	std::cout << "VVEDITE CARGO: (V3, M, Transport, FROM, TO): " << std::endl;
+	std::cin >> a >> b >> c >> d >> e;
+	Cargo* ncargo = new Cargo(a, b, c, d, e);
+	ncargo->show();
 	return false;
 }

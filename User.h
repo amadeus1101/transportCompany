@@ -5,6 +5,7 @@
 #include <string>
 
 #include "UsersHashMap.h"
+#include "Cargo.h"
 
 class User
 {
