@@ -7,11 +7,14 @@ class Route
 {
 protected:
 	int route_id;
-	int dep_id;
-	int des_id;
-	std::string departure;
-	std::string destination;
+	int dep_code;
+	int des_code;
+	std::string dep_country;
+	std::string dep_city;
+	std::string des_country;
+	std::string des_city;
 public:
+	Route();
 	Route(std::string, std::string);
 	//~Route();
 	//void show();

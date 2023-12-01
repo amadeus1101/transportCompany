@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 #include "Cargo.h"
 
@@ -9,12 +10,16 @@ class Application : public Cargo {
 protected:
 	int app_id;
 	int user_id;
-	int employee_id;
-	bool app_status;
-	std::string user_name;
-	std::string user_contact;
-	std::string employee_name;
+	bool is_approve;
+	std::string worker_username;
+	//sender
+	std::string sender_info[5];
+	//payment
+	std::string card_16;
+	std::string card_date;
+	//reciever
+	std::string reciever_info[5];
 public:
-	Application(double, double, std::string, std::string, std::string, std::string, std::string);
+	Application();
 	void show() override;
 };

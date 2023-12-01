@@ -1,10 +1,7 @@
 #include "Route.h"
 
-Route::Route(std::string _departure, std::string _destination)
+Route::Route()
 {
-	departure = _departure;
-	destination = _destination;
-	//READING FILE AND FILLING INT's
 }
 
 //void Route::show() {

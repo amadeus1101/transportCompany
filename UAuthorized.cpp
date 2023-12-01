@@ -1,7 +1,7 @@
 #include "UAuthorized.h"
 
 UAuthorized::UAuthorized() {
-	UObj = new UsersHashMap("USERS.dat", 10);
+	UObj = new UsersList("USERS.dat", 10);
 }
 
 void UAuthorized::getAll() {
@@ -41,7 +41,7 @@ bool UAuthorized::authorization() {
 		}
 		user->menu();
 	}
-	else std::cout << "PAROL NEVERNIJ ILI TAKOGO USERA NETU";
+	else std::cout << "The information is not valid or user with this parametrs does not exist";
 
 	//if (UObj->getAuth(_cusernm, _cpass)) std::cout << "USPESHNO" << std::endl;
 	
@@ -127,5 +127,88 @@ bool UAuthorized::validate(std::string _uname, std::string _pass) {
 		return false;
 	}
 	std::cout << "All data is valid. USER registrated" << std::endl;
+	return true;
+}
+
+bool UAuthorized::createCargo() {
+	std::string countriesArr[3][4] = {
+		{"Germany", "Berlin", "Frankfurt", "Munhen"},
+		{"France", "Paris", "Lion", "Marcel"},
+		{"Spain", "Madrid", "Barcelona", "Valencia"} };
+	std::string vehiclesArr[4] = { "Truck", "Train", "Ship", "Plane" };
+	std::string cargoTypes[4] = { "Glass", "Metal", "Plastic", "Wood" };
+	std::string packageTypes[3] = { "Paper", "Wooden", "Polymeric" };
+
+	int _cargo, _package;
+	int vic_code = -1, dep_code = -1, des_code = -1;
+	int country_choice;
+	double _cap, _wei;
+	std::string _vic, _dep, _des;
+	std::cout << "**********Cargo menu**********" << std::endl;
+	std::cout << "Enter your parameters: " << std::endl;
+
+	std::cout << std::endl << "capacity (m3): ";
+	std::cin >> _cap;
+
+	std::cout << std::endl << "weigth (kg): ";
+	std::cin >> _wei;
+
+	std::cout << std::endl << "Cargo type: " << std::endl;
+	for (int i = 0; i < 4; i++)
+		std::cout << i << ". " << cargoTypes[i] << std::endl;
+	std::cin >> _cargo;
+	std::cout << std::endl << "Your cargo-type: " << cargoTypes[_cargo] << std::endl;
+
+	std::cout << std::endl << "Package type: " << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << i << ". " << packageTypes[i] << std::endl;
+	std::cin >> _package;
+	std::cout << std::endl << "Your package-type: " << packageTypes[_package] << std::endl;
+
+	std::cout << std::endl << "Vehicle: " << std::endl;
+	for (int i = 0; i < 4; i++)
+		std::cout << i << ". " << vehiclesArr[i] << std::endl;
+	std::cin >> vic_code;
+	_vic = vehiclesArr[vic_code];
+
+	std::cout << std::endl << "Country of departure: " << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << i << ". " << countriesArr[i][0] << std::endl;
+	std::cin >> country_choice;
+	std::cout << std::endl << "Your country: " << countriesArr[country_choice][0] << ". Now choose the city" << std::endl;
+	for (int i = 1; i < 4; i++)
+		std::cout << i << ". " << countriesArr[country_choice][i] << std::endl;
+	std::cin >> dep_code;
+	_dep = countriesArr[country_choice][dep_code];
+
+	std::cout << std::endl << "Country of destination: " << std::endl;
+	for (int i = 0; i < 3; i++)
+		std::cout << i << ". " << countriesArr[i][0] << std::endl;
+	std::cin >> country_choice;
+	std::cout << std::endl << "Your country: " << countriesArr[country_choice][0] << ". Now choose the city" << std::endl;
+	for (int i = 1; i < 4; i++)
+		std::cout << i << ". " << countriesArr[country_choice][i] << std::endl;
+	std::cin >> des_code;
+	_des = countriesArr[country_choice][des_code];
+
+	//Cargo* ncargo = new Cargo(_cargo, _package, _cap, _wei, _vic, _dep, _des);
+	//ncargo->show();
+	std::cout << "Norm ili ne? (Y/N)" << std::endl;
+	char ch;
+	std::cin >> ch;
+
+	switch (ch)
+	{
+	case 'Y':
+		//std::cout << ncargo->calculateCargo() << std::endl;
+		break;
+	case 'N':
+		std::cout << "MENYAI DANNIE TOGDA" << std::endl;
+		break;
+	default:
+		std::cout << "Y/N chego slojnogo 2 letters vibrat??" << std::endl;
+		break;
+	}
+
 	return true;
 }

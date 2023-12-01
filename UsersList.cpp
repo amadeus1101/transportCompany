@@ -1,6 +1,6 @@
-#include "UsersHashMap.h"
+#include "UsersList.h"
 
-UsersHashMap::UsersHashMap(std::string _file_name, int _size) {
+UsersList::UsersList(std::string _file_name, int _size=10) {
 	count = 0;
 	size = _size;
 	file_name = _file_name;
@@ -68,7 +68,7 @@ UsersHashMap::UsersHashMap(std::string _file_name, int _size) {
 	fin.close();
 }
 
-UsersHashMap::~UsersHashMap() {
+UsersList::~UsersList() {
 	tUser* spt, * sp;
 	for (int i = 0; i < size; i++)
 	{
@@ -83,11 +83,11 @@ UsersHashMap::~UsersHashMap() {
 	delete[] usersTable;
 }
 
-int UsersHashMap::generateId() {
+int UsersList::generateId() {
 	return all_count;
 }
 
-bool UsersHashMap::write(std::string _username="", std::string _password="", std::string _name="") {
+bool UsersList::write(std::string _username="", std::string _password="", std::string _name="") {
 	int _status = 1;
 	int _id = generateId();
 
@@ -133,7 +133,7 @@ bool UsersHashMap::write(std::string _username="", std::string _password="", std
 	return true;
 }
 
-int UsersHashMap::hash(std::string _login) {
+int UsersList::hash(std::string _login) {
 	int hashRes = 0;
 	int len = _login.length();
 	for (int j = 0; j < len; j++)
@@ -143,7 +143,7 @@ int UsersHashMap::hash(std::string _login) {
 	return hashRes % size;
 }
 
-bool UsersHashMap::resize() {
+void UsersList::resize() {
 	count = 0;
 	all_count = 0;
 	int prev_size = size;
@@ -178,10 +178,9 @@ bool UsersHashMap::resize() {
 		}
 	}
 	delete[] temp_usersTable;*/
-	return true;
 }
 
-void UsersHashMap::rehash() {
+void UsersList::rehash() {
 	all_count = 0;
 	count = 0;
 	tUser** temp_usersTable = usersTable;
@@ -217,7 +216,7 @@ void UsersHashMap::rehash() {
 	delete[] temp_usersTable;
 }
 
-bool UsersHashMap::insert(tUser *user) {
+bool UsersList::insert(tUser *user) {
 	if (user->t_status < -2 || user->t_status > 5) return false;
 	if (count > size * 0.75)
 		resize();
@@ -238,7 +237,7 @@ bool UsersHashMap::insert(tUser *user) {
 	return true;
 }
 
-bool UsersHashMap::insert(int _userId, std::string _username, std::string _password, std::string _name, int _role=1) {
+bool UsersList::insert(int _userId, std::string _username, std::string _password, std::string _name, int _role=1) {
 	if (_role < -2 || _role > 5) return false;
 	tUser* user = new tUser;
 	user->next = nullptr;
@@ -268,7 +267,7 @@ bool UsersHashMap::insert(int _userId, std::string _username, std::string _passw
 	return true;
 }
 
-UsersHashMap::tUser* UsersHashMap::find(std::string _login) {
+UsersList::tUser* UsersList::find(std::string _login) {
 	int hashRes = hash(_login);
 	tUser* spt = usersTable[hashRes];
 	while (spt)
@@ -280,7 +279,7 @@ UsersHashMap::tUser* UsersHashMap::find(std::string _login) {
 	return nullptr;
 }
 
-std::string* UsersHashMap::getAuth(std::string _login, std::string _password) {
+std::string* UsersList::getAuth(std::string _login, std::string _password) {
 	tUser* authUser = find(_login);
 	if (!authUser) return NULL;
 	if (authUser->t_password == _password)
@@ -296,7 +295,7 @@ std::string* UsersHashMap::getAuth(std::string _login, std::string _password) {
 	return NULL;
 }
 
-bool UsersHashMap::remove(std::string _login) {
+bool UsersList::remove(std::string _login) {
 	tUser* spt = find(_login);
 	if (spt) 
 	{
@@ -307,7 +306,7 @@ bool UsersHashMap::remove(std::string _login) {
 	return false;
 }
 
-void UsersHashMap::getUsers() {
+void UsersList::getUsers() {
 	for (int i = 0; i < size; i++)
 	{
 		tUser* spt = usersTable[i];
@@ -320,7 +319,7 @@ void UsersHashMap::getUsers() {
 	}
 }
 
-bool UsersHashMap::doBackUp(std::string _filename) {
+bool UsersList::backup(std::string _filename) {
 
 	fout.open(_filename, std::ios::out | std::ios::binary | std::ios::app);
 	if (!fout.is_open())
@@ -371,7 +370,7 @@ bool UsersHashMap::doBackUp(std::string _filename) {
 	return true;
 }
 
-bool UsersHashMap::readOtherDB(std::string _filename, int _size = 10) {
+bool UsersList::read(std::string _filename) {
 	count = 0;
 	all_count = 0;
 	file_name = _filename;
@@ -380,7 +379,6 @@ bool UsersHashMap::readOtherDB(std::string _filename, int _size = 10) {
 
 	for (int i = 0; i < size; i++)
 		usersTable[i] = nullptr;
-	size = _size;
 	//FILE
 
 	fin.open(file_name, std::ios::in | std::ios::binary);

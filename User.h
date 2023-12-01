@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-#include "UsersHashMap.h"
+#include "UsersList.h"
 #include "Cargo.h"
 
 class User

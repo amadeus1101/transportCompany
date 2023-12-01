@@ -24,7 +24,7 @@
     <ClCompile Include="UAuthorized.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="UsersHashMap.cpp">
+    <ClCompile Include="UsersList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Employee.cpp">
@@ -45,9 +45,15 @@
     <ClCompile Include="Cargo.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplicationsList.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UsersHashMap.h">
+    <ClInclude Include="UsersList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ApplicationList.h">
@@ -80,5 +86,17 @@
     <ClInclude Include="Cargo.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationsList.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

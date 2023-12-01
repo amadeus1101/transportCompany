@@ -9,8 +9,9 @@ protected:
 	int vehicle_id;
 	std::string vehicle_type;
 public:
+	Vehicle();
 	Vehicle(std::string);
-	~Vehicle();
+	//~Vehicle();
 	//void show();
 };
 

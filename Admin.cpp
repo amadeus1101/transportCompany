@@ -1,6 +1,8 @@
 #include "Admin.h"
 
-Admin::Admin(int _id, std::string _username, std::string _password, std::string _name, int _status) : Manager::Manager(_id, _username, _password, _name, _status) {}
+Admin::Admin(int _id, std::string _username, std::string _password, std::string _name, int _status) : Manager::Manager(_id, _username, _password, _name, _status) {
+	usersdb = new UsersList("USERS.dat", 20);
+}
 
 void Admin::menu() {
 	int user_choice = 0;
@@ -16,7 +18,7 @@ void Admin::menu() {
 		case 1:
 			std::cout << "(1)" << std::endl; break;
 		case 2:
-			std::cout << "(2)" << std::endl; break;
+			usersdb->getUsers(); break;
 		case 3:
 			std::cout << "(3)" << std::endl; break;
 		default:
