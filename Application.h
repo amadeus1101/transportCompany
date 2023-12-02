@@ -4,9 +4,9 @@
 #include <string>
 #include <iomanip>
 
-#include "Cargo.h"
+#include "Freight.h"
 
-class Application : public Cargo {
+class Application : public Freight {
 protected:
 	int app_id;
 	int user_id;

@@ -1,6 +1,6 @@
-#include "Cargo.h"
+#include "Freight.h"
 
-Cargo::Cargo() {
+Freight::Freight() {
 	std::cout << std::setw(75 / 2 - 2) << std::setfill('-') << "-" << std::endl;
 	std::cout << std::setw(75 / 2 - 12) << std::setfill(' ') << " F R E I G H T " << std::endl;
 	std::cout << std::setw(75 / 2 - 2) << std::setfill('-') << "-" << std::endl;
@@ -22,7 +22,7 @@ Cargo::Cargo() {
 	price = 0;
 }
 
-void Cargo::show() {
+void Freight::show() {
 	const int bufSize = 75;
 	std::string phrase = "F R E I G H T";
 
@@ -43,6 +43,6 @@ void Cargo::show() {
 	std::cout << std::setw(bufSize) << std::setfill('-') << "-" << std::endl;
 }
 
-double Cargo::getPrice() {
+double Freight::getPrice() {
 	return cargo_params[0] * cargo_params[1] * cargo_params[2] / cargo_params[3] + cargo_type * package_type;
 }

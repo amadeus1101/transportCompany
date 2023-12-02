@@ -5,7 +5,6 @@
 #include <string>
 
 #include "UsersList.h"
-#include "Cargo.h"
 
 class User
 {

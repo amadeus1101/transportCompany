@@ -130,13 +130,13 @@
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ApplicationsList.cpp" />
-    <ClCompile Include="Cargo.cpp" />
+    <ClCompile Include="Freight.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="UAuthorized.cpp" />
+    <ClCompile Include="Guest.cpp" />
     <ClCompile Include="UsersList.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
@@ -145,14 +145,14 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="ApplicationList.h" />
     <ClInclude Include="ApplicationsList.h" />
-    <ClInclude Include="Cargo.h" />
+    <ClInclude Include="Freight.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="OrderList.h" />
-    <ClInclude Include="UAuthorized.h" />
+    <ClInclude Include="Guest.h" />
     <ClInclude Include="UsersList.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>

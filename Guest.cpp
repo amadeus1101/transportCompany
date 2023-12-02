@@ -1,15 +1,15 @@
-#include "UAuthorized.h"
+#include "Guest.h"
 
-UAuthorized::UAuthorized() {
+Guest::Guest() {
 	UObj = new UsersList("USERS.dat", 10);
 }
 
-void UAuthorized::getAll() {
+void Guest::getAll() {
 	std::cout << "**********USERS DB**********" << std::endl;
 	UObj->getUsers();
 }
 
-bool UAuthorized::authorization() {
+bool Guest::authorization() {
 	std::string _cusernm;
 	std::string _cpass;
 
@@ -48,7 +48,7 @@ bool UAuthorized::authorization() {
 	return true;
 }
 
-bool UAuthorized::registration() {
+bool Guest::registration() {
 	bool isPasswordValid = false;
 
 	std::string _username;
@@ -72,7 +72,7 @@ bool UAuthorized::registration() {
 	return true;
 }
 
-bool UAuthorized::validate(std::string _uname, std::string _pass) {
+bool Guest::validate(std::string _uname, std::string _pass) {
 	std::transform(_uname.begin(), _uname.end(), _uname.begin(), ::tolower);
 	std::transform(_pass.begin(), _pass.end(), _pass.begin(), ::tolower);
 	size_t unameLen = _uname.length();
@@ -130,7 +130,7 @@ bool UAuthorized::validate(std::string _uname, std::string _pass) {
 	return true;
 }
 
-bool UAuthorized::createCargo() {
+bool Guest::createCargo() {
 	std::string countriesArr[3][4] = {
 		{"Germany", "Berlin", "Frankfurt", "Munhen"},
 		{"France", "Paris", "Lion", "Marcel"},

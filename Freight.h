@@ -7,14 +7,14 @@
 #include "Vehicle.h"
 #include "Route.h"
 
-class Cargo {
+class Freight {
 protected:
 	int cargo_type;
 	int package_type;
 	double cargo_params[4];
 	double price;
 public:
-	Cargo();
+	Freight();
 	//Cargo(std::string, std::string, std::string);
 	virtual void show();
 	double getPrice();

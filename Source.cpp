@@ -5,7 +5,8 @@
 #include <iomanip>
 
 #include "Application.h"
-#include "Cargo.h"
+#include "Freight.h"
+#include "Route.h"
 
 using namespace std;
 
@@ -37,10 +38,12 @@ int main() {
 	//	}
 	//}
 	// 
-	Application tAp;
-	tAp.show();
-	Cargo tCar;
-	tCar.show();
+	//Application tAp;
+	//tAp.show();
+	//Cargo tCar;
+	//tCar.show();
+	Route tr;
+	tr.show();
 	
 	return 0;
 }

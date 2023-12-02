@@ -9,14 +9,18 @@ protected:
 	int route_id;
 	int dep_code;
 	int des_code;
-	std::string dep_country;
-	std::string dep_city;
-	std::string des_country;
-	std::string des_city;
 public:
 	Route();
-	Route(std::string, std::string);
+	//Route(std::string, std::string);
 	//~Route();
-	//void show();
+	void show();
+	bool validateRoute(int&);
+	std::string getCountryName(int&);
+	std::string getCityName(int&);
+private:
+	int len_i = 4;
+	int len_j = 3;
+	std::string countries[4] = { "Germany", "France", "Spain", "Belarus" };
+	std::string cities[4][3] = { {"Berlin", "Hamburg", "Frankfurt"}, {"Paris", "Lion", "Gil'o-tine"}, {"Madrid", "Barca", "Castillio"}, {"Minsk", "Grommel", "Vitebsk"} };
 };
 
