@@ -1,18 +1,21 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle(std::string _vehicleType)
+Vehicle::Vehicle()
 {
-	vehicle_id = -1;
-	vehicle_type = _vehicleType;
+	std::cout << "Choose preferred vehicle: " << std::endl;
+	for (int i = 0; i < vic_arr_len; i++)
+	{
+		std::cout << i << ". " << vic_arr[i] << std::endl;
+	}
+	std::cin >> vehicle_type;
 
-	if (vehicle_type == "TRUCK")
-		vehicle_id = 0;
-	if (vehicle_type == "TRAIN")
-		vehicle_id = 1;
-	if (vehicle_type == "SHIP")
-		vehicle_id = 2;
-	if (vehicle_type == "PLANE")
-		vehicle_id = 3;
+	while (vehicle_type < 0 || vehicle_type > vic_arr_len - 1)
+	{
+		std::cout << "Vehicle is incorrect, try again" << std::endl;
+		std::cin >> vehicle_type;
+	}
+
+	vehicle = vic_arr[vehicle_type];
 }
 
 //void Vehicle::show() {

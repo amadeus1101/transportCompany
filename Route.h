@@ -13,8 +13,8 @@ public:
 	Route();
 	//Route(std::string, std::string);
 	//~Route();
-	void show();
-	bool validateRoute(int&);
+	virtual void show();
+	bool valid(int&, int, int);
 	std::string getCountryName(int&);
 	std::string getCityName(int&);
 private:

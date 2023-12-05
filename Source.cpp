@@ -38,12 +38,12 @@ int main() {
 	//	}
 	//}
 	// 
-	//Application tAp;
-	//tAp.show();
-	//Cargo tCar;
+	Application tAp;
+	tAp.show();
+	//Freight tCar;
 	//tCar.show();
-	Route tr;
-	tr.show();
+	//Route tr;
+	//tr.show();
 	
 	return 0;
 }

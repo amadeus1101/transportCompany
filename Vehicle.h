@@ -6,12 +6,14 @@
 class Vehicle
 {
 protected:
-	int vehicle_id;
-	std::string vehicle_type;
+	int vehicle_type;
+	std::string vehicle;
 public:
 	Vehicle();
-	Vehicle(std::string);
 	//~Vehicle();
 	//void show();
+private:
+	const int vic_arr_len = 4;
+	std::string vic_arr[4] = { "Train", "Truck", "Ship", "Plane" };
 };
 

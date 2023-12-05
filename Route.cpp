@@ -3,14 +3,13 @@
 Route::Route()
 {
 	int chc;
-	std::cout << "R O U T EE" << std::endl;
 	std::cout << "Departure country: " << std::endl;
 	for (int i = 0; i < len_i; i++)
 	{
 		std::cout << i << ". " << countries[i] << std::endl;
 	}
 	std::cin >> dep_code;
-	while (!validateRoute(dep_code))
+	while (!valid(dep_code, 0, len_i))
 		std::cin >> dep_code;
 	
 	std::cout << "Departure city: " << std::endl;
@@ -19,7 +18,7 @@ Route::Route()
 		std::cout << j << ". " << cities[dep_code][j] << std::endl;
 	}
 	std::cin >> chc;
-	while (!validateRoute(chc))
+	while (!valid(chc, 0, len_j))
 		std::cin >> chc;
 	dep_code *= 1000;
 	dep_code += chc;
@@ -30,7 +29,7 @@ Route::Route()
 		std::cout << i << ". " << countries[i] << std::endl;
 	}
 	std::cin >> des_code;
-	while (!validateRoute(des_code))
+	while (!valid(des_code, 0, len_i))
 		std::cin >> des_code;
 
 	std::cout << "Destination city: " << std::endl;
@@ -39,7 +38,7 @@ Route::Route()
 		std::cout << j << ". " << cities[des_code][j] << std::endl;
 	}
 	std::cin >> chc;
-	while (!validateRoute(chc))
+	while (!valid(chc, 0, len_j))
 		std::cin >> chc;
 	des_code *= 1000;
 	des_code += chc;
@@ -51,14 +50,12 @@ void Route::show() {
 	std::cout << "TO: " << getCityName(des_code) << " [" << getCountryName(des_code) << "] - #" << des_code << std::endl;
 }
 
-bool Route::validateRoute(int &val) {
-	
-	if (val < 0 || val > len_i)
+bool Route::valid(int &val, int begin, int end) {
+	if (val < begin || val > end - 1)
 	{
 		std::cout << "The number is incorrect, try again" << std::endl;
 		return false;
 	}
-		
 	return true;
 }
 

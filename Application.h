@@ -13,12 +13,14 @@ protected:
 	bool is_approve;
 	std::string worker_username;
 	//sender
-	std::string sender_info[5];
+	std::string sen_name, sen_mail, sen_phone;
+	std::string sender_info[3];
 	//payment
 	std::string card_16;
 	std::string card_date;
 	//reciever
-	std::string reciever_info[5];
+	std::string rec_name, rec_mail, rec_phone;
+	std::string reciever_info[3];
 public:
 	Application();
 	void show() override;
