@@ -1,24 +1,18 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle()
-{
-	std::cout << "Choose preferred vehicle: " << std::endl;
-	for (int i = 0; i < vic_arr_len; i++)
-	{
-		std::cout << i << ". " << vic_arr[i] << std::endl;
-	}
-	std::cin >> vehicle_type;
-
-	while (vehicle_type < 0 || vehicle_type > vic_arr_len - 1)
-	{
-		std::cout << "Vehicle is incorrect, try again" << std::endl;
-		std::cin >> vehicle_type;
-	}
-
-	vehicle = vic_arr[vehicle_type];
+Vehicle::Vehicle() {
+	vehicle_type = -1;
 }
 
-//void Vehicle::show() {
-//	std::cout << "VEHICLE: " << std::endl;
-//	std::cout << vehicle_id << "   " << vehicle_type << std::endl;
-//}
+std::string Vehicle::getVehicleName() {
+	std::string vic_arr[4] = { "Train", "Truck", "Ship", "Plane" };
+	if(vehicle_type >= 0) return vic_arr[vehicle_type];
+	return "Undefined";
+}
+
+void Vehicle::getVicList() {
+	const int vic_arr_len = 4;
+	std::string vic_arr[4] = { "Train", "Truck", "Ship", "Plane" };
+	for (int i = 0; i < vic_arr_len; i++)
+		std::cout << i << ". " << vic_arr[i] << std::endl;
+}

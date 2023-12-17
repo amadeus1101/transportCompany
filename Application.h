@@ -2,26 +2,26 @@
 
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <stdlib.h>
 #include <iomanip>
+#include <time.h>
 
 #include "Freight.h"
 
 class Application : public Freight {
 protected:
-	int app_id;
-	int user_id;
+	char app_id[13], user_id[21], worker_id[21];
 	bool is_approve;
-	std::string worker_username;
 	//sender
-	std::string sen_name, sen_mail, sen_phone;
-	std::string sender_info[3];
-	//payment
-	std::string card_16;
-	std::string card_date;
+	char sen_fname[41], sen_lname[41], sen_mail[41], sen_phone[14];
 	//reciever
-	std::string rec_name, rec_mail, rec_phone;
-	std::string reciever_info[3];
+	char rec_fname[41], rec_lname[41], rec_mail[41], rec_phone[14];
 public:
 	Application();
-	void show() override;
+	Application(std::string, std::string);
+	//~Application();
+	void show();
+	char* getUserId();
+	char* getManagerId();
 };

@@ -5,7 +5,7 @@
 #include <string>
 #include <algorithm>
 
-#include "UsersList.h"
+#include "UsersDB.h"
 #include "User.h"
 #include "Employee.h"
 #include "Manager.h"
@@ -14,7 +14,6 @@
 class Guest 
 {
 private:
-	UsersList*UObj;
 	bool validate(std::string, std::string);
 public:
 	Guest();

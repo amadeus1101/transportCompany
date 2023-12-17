@@ -10,17 +10,16 @@
 class Freight : public Route, public Vehicle {
 protected:
 	int freight_type, package_type;
-	int len, wid, hei;
-	double wei;
+	double capacity, weight;
 	double price;
-	std::string freight, package;
 public:
 	Freight();
-	//Cargo(std::string, std::string, std::string);
-	void show() override;
+	Freight(int);
+	void show();
+	bool valid(double, double, double);
 	double getPrice();
-private:
-	const int fr_types_len = 6, pc_types_len = 4;
-	std::string fr_types[6] = { "Glass", "Furniture", "Exterior", "Stone/Granite", "Metal", "Etc" };
-	std::string pc_types[4] = { "Paper", "Wooden", "Plastic", "Polymeric" };
+	void getFreightList();
+	void getPackageList();
+	std::string getFreightName(int&);
+	std::string getPackageName(int&);
 };

@@ -24,7 +24,7 @@
     <ClCompile Include="Guest.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="UsersList.cpp">
+    <ClCompile Include="UsersDB.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Employee.cpp">
@@ -48,15 +48,18 @@
     <ClCompile Include="Application.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationsList.cpp">
+    <ClCompile Include="ApplicationsDB.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="HashTable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UsersList.h">
+    <ClInclude Include="UsersDB.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ApplicationList.h">
+    <ClInclude Include="ApplicationsDB.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OrderList.h">
@@ -89,14 +92,8 @@
     <ClInclude Include="Application.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
+    <ClInclude Include="HashTable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ApplicationsList.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

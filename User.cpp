@@ -5,7 +5,7 @@ User::User(int _userID, std::string _username, std::string _password, std::strin
 	user_id = _userID;
 	username = _username;
 	password = _password;
-	name = _name;
+	//name = _name;
 	status = _status;
 
 	std::string _filename = "USERS.dat";
@@ -47,7 +47,7 @@ void User::menu() {
 }
 
 void User::profile() {
-	std::cout << user_id << "   " << username << "   " << password << "   " << name << "   " << status << std::endl;
+	std::cout << user_id << "   " << username << "   " << password << "   " << status << std::endl;
 }
 
 bool User::createCargo() {

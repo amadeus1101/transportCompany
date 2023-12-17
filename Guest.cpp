@@ -1,12 +1,12 @@
 #include "Guest.h"
 
 Guest::Guest() {
-	UObj = new UsersList("USERS.dat", 10);
+	//UObj = new UsersList("USERS.dat", 10);
 }
 
 void Guest::getAll() {
 	std::cout << "**********USERS DB**********" << std::endl;
-	UObj->getUsers();
+	//UObj->getUsers();
 }
 
 bool Guest::authorization() {
@@ -20,9 +20,9 @@ bool Guest::authorization() {
 	std::cout << std::endl << "password: ";
 	std::cin >> _cpass;
 
-	std::string* userObj = UObj->getAuth(_cusernm, _cpass);
+	//std::string* userObj = UObj->getAuth(_cusernm, _cpass);
 
-	if (userObj != NULL)
+	/*if (userObj != NULL)
 	{
 		User* user;
 		int uid = atoi(userObj[0].c_str());
@@ -41,7 +41,7 @@ bool Guest::authorization() {
 		}
 		user->menu();
 	}
-	else std::cout << "The information is not valid or user with this parametrs does not exist";
+	else std::cout << "The information is not valid or user with this parametrs does not exist";*/
 
 	//if (UObj->getAuth(_cusernm, _cpass)) std::cout << "USPESHNO" << std::endl;
 	
@@ -67,7 +67,7 @@ bool Guest::registration() {
 		std::cin >> _name;
 		isPasswordValid = validate(_username, _password);
 	}
-	UObj->write(_username, _password, _name);
+	//UObj->write(_username, _password, _name);
 
 	return true;
 }
@@ -121,11 +121,11 @@ bool Guest::validate(std::string _uname, std::string _pass) {
 		std::cout << "The password should contain minimum 1 letter" << std::endl;
 		return false;
 	}
-	if (UObj->find(_uname) != NULL)
+	/*if (UObj->find(_uname) != NULL)
 	{
 		std::cout << "The username has already taken, try to create another new;(" << std::endl;
 		return false;
-	}
+	}*/
 	std::cout << "All data is valid. USER registrated" << std::endl;
 	return true;
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
@@ -7,6 +8,9 @@
 #include "Application.h"
 #include "Freight.h"
 #include "Route.h"
+
+#include "UsersDB.h"
+#include "ApplicationsDB.h"
 
 using namespace std;
 
@@ -38,12 +42,28 @@ int main() {
 	//	}
 	//}
 	// 
-	Application tAp;
-	tAp.show();
-	//Freight tCar;
-	//tCar.show();
+	//Application* ap = new Application("123456");
+	//ap->show();
+	ApplicationsDB* tt = new ApplicationsDB("db/_applications/", "aconfig.dat", "db/backups/_applications/");
+	//tt->create("userID");
+	tt->read();
+	delete tt;
 	//Route tr;
 	//tr.show();
-	
+	//UsersDB *lst = new UsersDB("db/_users/", "uconfig.dat", "db/backups/_users/");
+	//lst->create("usr999", "qwerty", "12345", "654321", 2);
+	//lst->resize();
+	//lst->remove("u234");
+	//lst->read();
+	//lst->backup();
+	//delete lst;
+
+
 	return 0;
 }
+
+// ИСПРАВИИИИИИИИТЬ\СДЕЛАААААТЬ
+// 1. Почему хеш не обновляется
+// 2. А может сделать 1 класс шаблоном для БД?
+// 3. Поменять названия для БД?
+// 

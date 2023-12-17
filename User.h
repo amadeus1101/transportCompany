@@ -4,16 +4,15 @@
 #include <fstream>
 #include <string>
 
-#include "UsersList.h"
-
 class User
 {
 protected:
-	int user_id;
 	std::string username;
 	std::string password;
-	std::string name;
+	std::string first_name;
+	std::string last_name;
 	int status;
+	int user_id;
 	//HASH
 	//UsersHashMap *UDB;
 public:
