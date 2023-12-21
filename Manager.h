@@ -9,7 +9,7 @@
 class Manager : public Employee
 {
 public:
-	Manager(int, std::string, std::string, std::string, int);
+	//Manager(int, std::string, std::string, std::string, int);
 	void menu() override;
 	//void showCompleted() override;
 };

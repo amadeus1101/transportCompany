@@ -1,6 +1,6 @@
 #include "Employee.h"
 
-Employee::Employee(int _id, std::string _username, std::string _password, std::string _name, int _status) : User::User(_id, _username, _password, _name, _status) {}
+//Employee::Employee(int _id, std::string _username, std::string _password, std::string _name, int _status) : User::User(_id, _username, _password, _name, _status) {}
 
 void Employee::menu() {
 	int user_choice = 0;

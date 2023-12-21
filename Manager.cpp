@@ -1,6 +1,6 @@
 #include "Manager.h"
 
-Manager::Manager(int _id, std::string _username, std::string _password, std::string _name, int _status) : Employee::Employee(_id, _username, _password, _name, _status) {}
+//Manager::Manager(int _id, std::string _username, std::string _password, std::string _name, int _status) : Employee::Employee(_id, _username, _password, _name, _status) {}
 
 void Manager::menu() {
 	int user_choice = 0;

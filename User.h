@@ -3,26 +3,29 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
+
+#include "Freight.h"
 
 class User
 {
 protected:
-	std::string username;
-	std::string password;
-	std::string first_name;
-	std::string last_name;
+	char username[11];
+	char password[11];
+	char first_name[21];
+	char last_name[21];
 	int status;
-	int user_id;
 	//HASH
 	//UsersHashMap *UDB;
 public:
-	User(int, std::string, std::string, std::string, int);
-	bool getTrack();
+	User();
+	User(std::string&);
+	//bool getTrack();
 	void profile();
 	virtual void menu();
 	//virtual void showCompleted();
 private:
-	bool createCargo();
+	bool createFreight();
 	//bool updateCargo();
 	//void showProcessing();
 };

@@ -5,65 +5,73 @@
 #include <stdio.h>
 #include <iomanip>
 
-#include "Application.h"
-#include "Freight.h"
-#include "Route.h"
-
+#include "Guest.h"
+#include "User.h"
+#include "Employee.h"
+#include "Manager.h"
+#include "Admin.h"
 #include "UsersDB.h"
-#include "ApplicationsDB.h"
+#include "Freight.h"
 
 using namespace std;
 
+string USERS_PATH = "db/_users/";
+UsersDB database{ USERS_PATH, "uconfig.dat", "db/backups/_users/" };
+User* user;
+
+void auth();
+void reg();
+void addFr();
+
 int main() {
-	////ENTER -> WORK -> EXIT
-	//UAuthorized unAuthUser;
-	//int user_choice = 0;
-	//while (user_choice != 4)
-	//{
-	//	cout << "Transport Company Information System" << endl;
-	//	cout << "MAIN MENU" << endl;
-	//	cout << "1. AUTHERIZATION" << endl;
-	//	cout << "2. REGISTRATION" << endl;
-	//	cout << "3. Create Cargo" << endl;
-	//	cout << "4. EXIT" << endl;
-	//	cin >> user_choice;
-	//	switch (user_choice)
-	//	{
-	//	case 1:
-	//		unAuthUser.authorization(); break;
-	//	case 2:
-	//		unAuthUser.registration(); break;
-	//	case 3:
-	//		unAuthUser.createCargo(); break;
-	//	case 4:
-	//		std::cout << "(4)" << std::endl; break;
-	//	default:
-	//		unAuthUser.getAll();
-	//	}
-	//}
-	// 
-	//Application* ap = new Application("123456");
-	//ap->show();
-	ApplicationsDB* tt = new ApplicationsDB("db/_applications/", "aconfig.dat", "db/backups/_applications/");
-	//tt->create("userID");
-	tt->read();
-	delete tt;
-	//Route tr;
-	//tr.show();
-	//UsersDB *lst = new UsersDB("db/_users/", "uconfig.dat", "db/backups/_users/");
-	//lst->create("usr999", "qwerty", "12345", "654321", 2);
-	//lst->resize();
-	//lst->remove("u234");
-	//lst->read();
-	//lst->backup();
-	//delete lst;
-
-
+	//ENTER -> WORK -> EXIT
+	int choice = 0;
+	while (choice != 5)
+	{
+		cout << "*** Main menu ***" << endl;
+		cout << "1. Auth" << endl;
+		cout << "2. Reg" << endl;
+		cout << "3. Get a quote ($)" << endl;
+		cout << "4. Get tracker" << endl;
+		cout << "5. Quit" << endl;
+		cout << "Your choice: ";
+		cin >> choice;
+		cout << endl;
+		switch (choice)
+		{
+		case 1:
+			auth();
+			break;
+		case 2:
+			reg();
+			break;
+		case 3:
+			cout << "QUOTE" << endl; break;
+		case 4:
+			cout << "Tracker" << endl; break;
+		default:
+			break;
+		}
+	}
 	return 0;
 }
 
-// ÈÑÏÐÀÂÈÈÈÈÈÈÈÈÒÜ\ÑÄÅËÀÀÀÀÀÒÜ
-// 1. Ïî÷åìó õåø íå îáíîâëÿåòñÿ
-// 2. À ìîæåò ñäåëàòü 1 êëàññ øàáëîíîì äëÿ ÁÄ?
-// 3. Ïîìåíÿòü íàçâàíèÿ äëÿ ÁÄ?
-// 
+void auth() {
+	string res = database.autharization();
+	if (res == "null")
+	{
+		cout << "The user with login does not exist" << endl;
+		return;
+	}
+	res = USERS_PATH + res;
+	user = new User(res);
+}
+
+void reg() {
+	if (!database.registration())
+	{
+		cout << "O No! Something went wrong. The user was not registrated. Try again" << endl;
+		return;
+	}
+	cout << "SUCCESS. User was registrated with no warnings" << endl;
+}

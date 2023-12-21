@@ -9,7 +9,7 @@
 class Employee : public User
 {
 public:
-	Employee(int, std::string, std::string, std::string, int);
+	//Employee(int, std::string, std::string, std::string, int);
 	void menu() override;
 	//void showCompleted() override;
 };

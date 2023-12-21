@@ -1,8 +1,6 @@
 #include "Admin.h"
 
-Admin::Admin(int _id, std::string _username, std::string _password, std::string _name, int _status) : Manager::Manager(_id, _username, _password, _name, _status) {
-	//usersdb = new UsersList("USERS.dat", 20);
-}
+//Admin::Admin(int _id, std::string _username, std::string _password, std::string _name, int _status) : Manager::Manager(_id, _username, _password, _name, _status)
 
 void Admin::menu() {
 	int user_choice = 0;

@@ -6,65 +6,158 @@ UsersDB::~UsersDB() {}
 
 //DATABASE OPERATIONS
 
-bool UsersDB::create(std::string _uname, std::string _pass, std::string _fname, std::string _lname, int _role) {
-	std::string _flname;
-	char mas16[] = { 'a', 'b', 'c', 'd', 'e', 'f' };
-	int t_sym = 0;
-	int len = _uname.length();
+std::string UsersDB::autharization() {
+	char _login[11];
+	char _password[11];
+	std::cout << "AUTHORIZATION: " << std::endl;
+	std::cout << "Enter yout data: " << std::endl;
+	std::cout << std::endl << "login: ";
+	std::cin >> _login;
+	std::cout << std::endl << "password: ";
+	std::cin >> _password;
+	std::cout << std::endl;
+	int pos = find(_login);
+	if (pos > -1)
+	{
+		if (std::strcmp(_login, hashSet[pos].t_key.c_str()) == 0 && std::strcmp(_password, hashSet[pos].t_value.c_str()) == 0)
+		{
+			std::string _flname = "";
+			int stlen = std::strlen(_login);
+			int p = 0;
+			int alen = alphabet.length();
+			for (int i = 0; i < stlen; i++)
+			{
+				p = 0;
+				while (_login[i] != alphabet[p])
+					p++;
+				p + 7 > alen ? _flname += alphabet[p + 7 - alen] : _flname += alphabet[p + 7];
+			}
+			_flname += ".dat";
+			return _flname;
+		}
+	}
+	return "null";
+}
+
+bool UsersDB::registration() {
+	char _username[11];
+	char _password[11];
+	char _fname[21];
+	char _lname[21];
+	std::cout << "REGISTRATION" << std::endl;
+	std::cout << "Enter yout data: " << std::endl;
+	std::cout << std::endl << "Login: ";
+	std::cin >> _username;
+	std::cout << std::endl << "Password: ";
+	std::cin >> _password;
+	std::cout << std::endl << "First name: ";
+	std::cin >> _fname;
+	std::cout << std::endl << "Last name: ";
+	std::cin >> _lname;
+	for (int i = 0; i < std::strlen(_username); i++)
+		_username[i] = std::tolower(_username[i]);
+	for (int i = 0; i < std::strlen(_password); i++)
+		_password[i] = std::tolower(_password[i]);
+	if (validate(_username, _password))
+	{
+		create(_username, _password, _fname, _lname, 1);
+		return true;
+	}
+	return false;		
+}
+
+bool UsersDB::validate(std::string _uname, std::string _pass)
+{
+	size_t unameLen = _uname.length();
+	size_t passLen = _pass.length();
+	bool isPassValid = false;
+
+	if (unameLen == 0 || passLen == 0)
+	{
+		std::cout << "Fields cannot be empty" << std::endl;
+		return false;
+	}
+	if (unameLen < 5 || unameLen > 11)
+	{
+		std::cout << "The username should be >= 6 and < 11 symbols";
+		return false;
+	}
+	if (passLen < 5 || passLen > 13)
+	{
+		std::cout << "The password should be > 4 and < 13 symbols ";
+		return false;
+	}
+	for (int j = 0; j < passLen; j++)
+	{
+		char c = _pass[j];
+		if (c < 57)
+		{
+			isPassValid = true;
+			break;
+		}
+	}
+	if (!isPassValid) {
+		std::cout << "The password should contain minimum 1 number" << std::endl;
+		return false;
+	}
+	isPassValid = false;
+	for (int j = 0; j < passLen; j++)
+	{
+		char c = _pass[j];
+		if (c > 65)
+		{
+			isPassValid = true;
+			break;
+		}
+	}
+	if (!isPassValid) {
+		std::cout << "The password should contain minimum 1 letter" << std::endl;
+		return false;
+	}
+	if (find(_uname) != -1)
+	{
+		std::cout << "The username has already taken, try to create another new;(" << std::endl;
+		return false;
+	}
+	return true;
+}
+
+bool UsersDB::create(const char* _uname, const char* _pass, const char* _fname, const char* _lname, int _role) {
+	std::string _flname = "";
+	int len = std::strlen(_uname);
+	int p;
+	int alen = alphabet.length();
 	for (int j = 0; j < len; j++)
 	{
-		t_sym = _uname[j];
-		_flname += std::to_string(t_sym / 16);
-		t_sym % 16 > 9 ? _flname += mas16[t_sym % 16 - 10] : _flname += std::to_string(t_sym % 16);
-	
+		p = 0;
+		while (_uname[j] != alphabet[p])
+			p++;
+		p + 7 > alen ? _flname += alphabet[p + 7 - alen] : _flname += alphabet[p + 7];
 	}
-	while (_flname.length() < 20)
-		_flname = "00" + _flname;
-	_flname += ".dat";
-	
-	file->open(PATH + _flname, std::ios::binary | std::ios::out);
-
-	if (!file->is_open())
-		return false;
-
-	file->write((char*)&len, sizeof(len));
-	for (int i = 0; i < len; i++)
-	{
-		file->write((char*)&_uname[i], sizeof(_uname[i]));
-	}
-
-	len = _pass.length();
-	file->write((char*)&len, sizeof(len));
-	for (int i = 0; i < len; i++)
-	{
-		file->write((char*)&_pass[i], sizeof(_pass[i]));
-	}
-
-	len = _fname.length();
-	file->write((char*)&len, sizeof(len));
-	for (int i = 0; i < len; i++)
-	{
-		file->write((char*)&_fname[i], sizeof(_fname[i]));
-	}
-
-	len = _lname.length();
-	file->write((char*)&len, sizeof(len));
-	for (int i = 0; i < len; i++)
-	{
-		file->write((char*)&_lname[i], sizeof(_lname[i]));
-	}
-
-	file->write((char*)&_role, sizeof(_role));
-
-	file->close();
 
 	HashNode* spt = new HashNode;
 	spt->t_key = _uname;
-	spt->t_value = _flname;
+	spt->t_value = _pass;
 	if (!push(*spt)) std::cout << "ERROR in creating hash-table" << std::endl;
 	if (count > size * resize_val)
 		resize();
 	delete spt;
+	findAll();
+
+	_flname = PATH + _flname + ".dat";
+	
+	file->open(_flname, std::ios::binary | std::ios::out);
+
+	if (!file->is_open())
+		return false;
+
+	file->write((char*)&_uname, sizeof(_uname));
+	file->write((char*)&_pass, sizeof(_pass));
+	file->write((char*)&_fname, sizeof(_fname));
+	file->write((char*)&_lname, sizeof(_lname));
+	file->write((char*)&_role, sizeof(_role));
+
+	file->close();
 
 	return true;
 }
