@@ -5,25 +5,23 @@
 #include <stdio.h>
 #include <iomanip>
 
-#include "Guest.h"
 #include "User.h"
 #include "Employee.h"
 #include "Manager.h"
 #include "Admin.h"
-#include "UsersDB.h"
+#include "UsersList.h"
 #include "Freight.h"
 
 using namespace std;
 
-string USERS_PATH = "db/_users/";
-UsersDB database{ USERS_PATH, "uconfig.dat", "db/backups/_users/" };
-User* user;
+UsersList database{ "db/_users/", "db/backups/_users/"};
 
 void auth();
 void reg();
 void addFr();
 
 int main() {
+	database.print();
 	//ENTER -> WORK -> EXIT
 	int choice = 0;
 	while (choice != 5)
@@ -63,8 +61,8 @@ void auth() {
 		cout << "The user with login does not exist" << endl;
 		return;
 	}
-	res = USERS_PATH + res;
-	user = new User(res);
+	//res = USERS_PATH + res;
+	//user = new User(res);
 }
 
 void reg() {

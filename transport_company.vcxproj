@@ -137,8 +137,7 @@
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Guest.cpp" />
-    <ClCompile Include="UsersDB.cpp" />
+    <ClCompile Include="UsersList.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,8 +151,7 @@
     <ClInclude Include="Route.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="OrderList.h" />
-    <ClInclude Include="Guest.h" />
-    <ClInclude Include="UsersDB.h" />
+    <ClInclude Include="UsersList.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

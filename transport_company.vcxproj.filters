@@ -21,10 +21,7 @@
     <ClCompile Include="User.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Guest.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="UsersDB.cpp">
+    <ClCompile Include="UsersList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Employee.cpp">
@@ -56,7 +53,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UsersDB.h">
+    <ClInclude Include="UsersList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ApplicationsDB.h">
@@ -66,9 +63,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Guest.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Employee.h">
