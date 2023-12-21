@@ -10,18 +10,19 @@
 #include "Manager.h"
 #include "Admin.h"
 #include "UsersList.h"
+#include "ApplicationsList.h"
 #include "Freight.h"
 
 using namespace std;
 
 UsersList database{ "db/_users/", "db/backups/_users/"};
+ApplicationsList appdb{ "db/_applications/", "db/backups/_applications/" };
 
 void auth();
 void reg();
 void addFr();
 
 int main() {
-	database.print();
 	//ENTER -> WORK -> EXIT
 	int choice = 0;
 	while (choice != 5)

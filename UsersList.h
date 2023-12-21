@@ -3,11 +3,11 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctime>
 #include <algorithm>
+#include <string>
 #include <map>
 
 using namespace std;
@@ -18,9 +18,6 @@ private:
 	string PATH;
 	string BACKUP_PATH;
 	fstream* file;
-	int size;
-	int count;
-	const double resize_val = 0.75;
 
 	map<string, string> users;
 	struct UserTemp {

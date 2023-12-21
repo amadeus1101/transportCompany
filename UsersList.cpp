@@ -42,6 +42,7 @@ UsersList::~UsersList() {
 	}
 	file->close();
 	delete file;
+	users.clear();
 }
 
 //HASH OPERATIONS
@@ -201,10 +202,11 @@ bool UsersList::remove(string _key) {
 
 bool UsersList::backup() {
 	fstream* back_file = new fstream;
-	//time_t mytime = time(NULL);
-	//struct tm* now = localtime(&mytime);
-	string date = "BACKED UP AT 00.00.0000::00-00 [00 objects]";
-	//+to_string(now->tm_mday) + to_string(now->tm_mon + 1) + to_string(now->tm_year + 1900) + " :: " + to_string(now->tm_hour) + ":" + to_string(now->tm_min);
+	time_t mytime = time(nullptr);
+	struct tm* now = new tm;
+	localtime_s(now, &mytime);
+	string date = "BACKED UP AT " + to_string(now->tm_mday) + "-" + to_string(now->tm_mon + 1) + "-" + to_string(now->tm_year + 1900) + "::" + to_string(now->tm_hour) + "." + to_string(now->tm_min) + "::[" + to_string(users.size()) + " objects]";
+	delete now;
 
 	//CONFIG BACKUP
 	back_file->open(BACKUP_PATH + "config.dat", ios::binary | ios::out);

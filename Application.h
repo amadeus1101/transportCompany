@@ -22,6 +22,7 @@ public:
 	Application(std::string, std::string);
 	//~Application();
 	void show();
+	std::string getAppId();
 	char* getUserId();
 	char* getManagerId();
 };

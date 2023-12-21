@@ -45,7 +45,7 @@
     <ClCompile Include="Application.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ApplicationsDB.cpp">
+    <ClCompile Include="ApplicationsList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="HashTable.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="UsersList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ApplicationsDB.h">
+    <ClInclude Include="ApplicationsList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OrderList.h">

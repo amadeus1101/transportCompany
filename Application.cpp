@@ -118,3 +118,7 @@ char* Application::getManagerId()
 {
 	return worker_id;
 }
+
+std::string Application::getAppId() {
+	return app_id;
+}
