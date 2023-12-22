@@ -5,9 +5,10 @@ Route::Route() {
 	des_code = -1;
 }
 
-Route::Route(int _dep, int _des) {
+Route::Route(int _dep, int _des, int _pr) {
 	dep_code = _dep;
 	des_code = _des;
+	route_ratio = _pr;
 }
 
 void Route::getCountries() {

@@ -8,15 +8,13 @@ class Route
 protected:
 	int dep_code;
 	int des_code;
+	int route_ratio;
 public:
 	Route();
-	Route(int, int);
+	Route(int, int, int);
 	void getCountries();
 	void getCities(int&);
 	std::string getCountryName(int&);
 	std::string getCityName(int&);
-private:
-	int len_i = 4;
-	int len_j = 4;
 };
 

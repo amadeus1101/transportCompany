@@ -135,6 +135,7 @@
     <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Route.cpp" />
+    <ClCompile Include="RoutesList.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UsersList.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="HashTable.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Route.h" />
+    <ClInclude Include="RoutesList.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="OrderList.h" />
     <ClInclude Include="UsersList.h" />
